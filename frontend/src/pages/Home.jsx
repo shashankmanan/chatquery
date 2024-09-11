@@ -6,6 +6,7 @@ import AddQuery from '../components/AddQuery'
 import DeleteQuery from '../components/DeleteQuery'
 import UpdateQuery from '../components/UpdateQuery'
 import ReadQuery from '../components/ReadQuery'
+import NavBar from '../components/NavBar'
 
 export default function Home() {
   const [columns,setColumns] = useState([
@@ -18,35 +19,37 @@ export default function Home() {
     'transmission',
     'mileage'
 ])
-  const [query,setQuery] = useState(<AddQuery columnNames={columns}/>)
+  const [query,setQuery] = useState(<ReadQuery columnNames={columns}/>)
 
   
   const queryButtonClickHandler = (operation) => {
     switch(operation) {
       case "add_data_query" : setQuery(<AddQuery columnNames={columns}/>)
           break
-      case "update_data_query" : setQuery(UpdateQuery)
+      case "update_data_query" : setQuery(<UpdateQuery columnNames={columns}/>)
           break
-      case "delete_data_query" : setQuery(DeleteQuery)
+      case "delete_data_query" : setQuery(<DeleteQuery columnNames={columns}/>)
           break
-      case "get_data_query" : setQuery(ReadQuery)
+      case "get_data_query" : setQuery(<ReadQuery columnNames={columns}/>)
           break
       default: setQuery(AddQuery)
     }
   } 
   
   return (
+    <>
+
     <div className='d-flex flex-column align-items-center'>
       <div className='d-flex flex-row align-items-center justify-content-evenly m-1' style={{width:"60vh"}}>
+      <Button variant='primary' onClick={() => queryButtonClickHandler("get_data_query") }>Get Data</Button>
       <Button variant='primary' onClick={() => queryButtonClickHandler("add_data_query") }>Add</Button>
       <Button variant='primary' onClick={() => queryButtonClickHandler("update_data_query") }>Update</Button>
       <Button variant='primary' onClick={() => queryButtonClickHandler("delete_data_query") }>Delete</Button>
-      <Button variant='primary' onClick={() => queryButtonClickHandler("get_data_query") }>Get Data</Button>
       </div>
-      <div className='box'>
+      <div className='box' style={{backgroundColor:"white"}}>
         { query }
       </div>
-
     </div>
+    </>
   )
 }
