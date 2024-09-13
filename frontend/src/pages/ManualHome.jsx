@@ -8,7 +8,7 @@ import UpdateQuery from '../components/UpdateQuery'
 import ReadQuery from '../components/ReadQuery'
 import NavBar from '../components/NavBar'
 
-export default function Home() {
+export default function ManualHome() {
   const [columns,setColumns] = useState([
     'id',
     'make',

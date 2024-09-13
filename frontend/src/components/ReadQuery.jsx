@@ -15,11 +15,10 @@ export default function ReadQuery({ columnNames }) {
   useEffect(
     () => {
     getData()
-
   } , []
 )
   const getData = async () => {
-    const baseURL = routes_urls['GET_ALL_DATA_CAR']  //"http://localhost:5000/cars/"
+    const baseURL = routes_urls['GET_ALL_DATA_CAR']
     
     
     try{ 
@@ -40,7 +39,10 @@ export default function ReadQuery({ columnNames }) {
     console.log(searchValue)
     const resp = await getCarData({"field":searchField , "value" : searchValue})
     console.log(resp)
+    console.log(resp.data[0])
     setData(resp.data)
+    console.log(data)
+    setSelectedData(0)
 }
   return (
     <div
@@ -84,7 +86,9 @@ export default function ReadQuery({ columnNames }) {
       <button style= {{border:"none",backgroundColor:"white"}} className="p-4" onClick={ () => selectedData == 0 ? setSelectedData(0) : setSelectedData(selectedData - 1) } ><h2>{ "<" }</h2></button>
       <h3 className="p-4 border"> {selectedData + 1}</h3>
       <button style= {{border:"none",backgroundColor:"white"}} className="p-4" onClick={ () => selectedData == data.length - 1? setSelectedData(data.length - 1) : setSelectedData(selectedData + 1) }><h2>{ ">" }</h2></button>
+      <Button onClick={() =>getData()}>Show All</Button>
     </div>
+      
     </div>
   );
 }

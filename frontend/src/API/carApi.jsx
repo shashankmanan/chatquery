@@ -5,7 +5,8 @@ const getCarData = async (input) => {
     let baseURL = routes_urls["GET_ONE_DATA_CAR"]
     console.log(input)
     const newVal = input.value.replace(" ","%20")
-    baseURL += `?${input.field}=${newVal}`
+    baseURL += `?${input.field == "id" ? "_id" : input.field}=${newVal}`
+    console.log(baseURL)
     try {
         const response = await axios.get(baseURL)
         if(response.status != 200)

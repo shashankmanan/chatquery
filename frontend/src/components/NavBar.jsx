@@ -7,7 +7,7 @@ export default function NavBar() {
   return (
     <Navbar  data-bs-theme="dark">
         <Container>
-          <Navbar.Brand href="#home">ChatQuery</Navbar.Brand>
+          <Navbar.Brand href="/#/home">ChatQuery</Navbar.Brand>
           <Navbar.Collapse className="justify-content-end">
           <Navbar.Text>
             Signed in as: <a href="#login">User</a>
