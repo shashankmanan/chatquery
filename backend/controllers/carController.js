@@ -43,9 +43,38 @@ const deleteFromDatabase = async (request,response,next) => {
     } 
 }
 
+const updateFromDatabase = async (request, response, next) => {
+    try {
+        const { _id } = request.params;
+        const updateData = request.body;
+        
+        if (!_id) {
+            return response.status(400).json({ message: "ID is required for update" });
+        }
+        
+        const updatedRecord = await carModel.findByIdAndUpdate(
+            _id,
+            updateData,
+            { new: true, runValidators: true }
+        );
+        
+        if (!updatedRecord) {
+            return response.status(404).json({ message: "Record not found" });
+        }
+        
+        response.status(200).json({
+            message: "Successfully updated",
+            car: updatedRecord
+        });
+    } catch (error) {
+        next({ status: error.status, message: error.message });
+    }
+};
+
 module.exports = {
     getAllFromDatabase,
-    addToDatabase , 
+    addToDatabase, 
     getDataBasedOnConstraints,
-    deleteFromDatabase
+    deleteFromDatabase,
+    updateFromDatabase
 }

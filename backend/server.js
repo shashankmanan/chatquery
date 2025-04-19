@@ -1,6 +1,10 @@
 const express = require('express')
 const carRouter = require("./routes/carRoutes")
-const dotenv = require('dotenv').config()
+// Load environment variables first
+const dotenv = require('dotenv')
+// Configure dotenv to load environment variables
+dotenv.config()
+
 const mongoose = require("mongoose")
 const cors = require('cors')
 const errorHandler = require("./middleware/errorHandling")
@@ -22,11 +26,11 @@ const connectDB = async () => {
 
 app.use(cors())
 app.use(express.json())
-app.use("/cars/" , carRouter)
+app.use("/cars/", carRouter)
 app.use(errorHandler)
 
 
 app.listen(PORT, () => {
-    console.log("listening..." + PORT)
+    console.log("listening on port " + PORT)
     connectDB()
 })
